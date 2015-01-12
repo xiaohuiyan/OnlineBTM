@@ -1,22 +1,23 @@
 CC=g++
 CFLAGS=-c -pipe -O3
 #SRC=$(wildcard *.cpp)
-MODEL_OBJ=base.o btmUpto.o obtm.o ibtm.o main.o
-MODEL_EXE=run
+MODEL_EXE=run infer
 
 all:$(MODEL_EXE) 
 
-$(MODEL_EXE):$(MODEL_OBJ)
-	$(CC) $(MODEL_OBJ) -o $@
+run:obtm.o ibtm.o main.o
+	$(CC) $^ -o $@
 
-main.o:base.h obtm.h ibtm.h
-base.h.o:base.h biterm.h doc.h
-btmUpto.o:base.h biterm.h doc.h
-obtm.o:obtm.h base.h biterm.h doc.h
-ibtm.o:ibtm.h base.h biterm.h doc.h
+infer:infer.o
+	$(CC) $^ -o $@
+
+main.o:obtm.h ibtm.h
+obtm.o:obtm.h biterm.h doc.h
+ibtm.o:ibtm.h biterm.h doc.h
+infer.o:infer.h doc.h
 
 %.o:%.cpp
 	$(CC) $(INCLUDE) $(CFLAGS) $< -o $@
 
 clean:
-	rm -rf $(MODEL_OBJ) $(MODEL_EXE)
+	rm -rf *.o $(MODEL_EXE)
