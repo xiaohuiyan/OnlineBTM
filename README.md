@@ -50,11 +50,12 @@ Indeed, the *runExample.sh* processes the input documents in 4 steps.
 **3. Inference topic proportions for documents, i.e., P(z|d)**     
    If you need to analysis the topic proportions of each documents, just run the following common to infer that using the model estimated.
 
-        $ ./src/btm inf <type> <K> <docs_dir> <model_dir>
-    	K	int, number of topics, like 20
-    	type	 string, 3 choices:sum_w, sum_b, mix. sum_b is used in our paper.
-    	docs_dir	string, path of training docs
-    	model_dir	string, output directory
+    $ ./src/inf <type> <K> <day> <docs_dir> <model_dir>
+      K	int, number of topics, like 20
+      day   int, the nth day, like 0, 1, ..
+      type	 string, 3 choices:sum_w, sum_b, mix. sum_b is used in our paper.
+      docs_dir	string, path of training docs
+      model_dir	string, output directory
 
    The result will be output to "model_dir":   
    - k20.day0.pz_d: a N*K matrix for P(z|d), suppose K=20 and day=0
